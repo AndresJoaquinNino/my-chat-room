@@ -1,7 +1,7 @@
 import useAuthContext from "../hooks/useAuthContext";
 import './SignIn.css';
 import ChatIcon from '@mui/icons-material/Chat';
-import LoginIcon from '@mui/icons-material/Login';
+
 const SignIn = () => {
     const { isLog, setLog } = useAuthContext();
 
