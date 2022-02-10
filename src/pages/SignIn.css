@@ -75,6 +75,7 @@
 .link-blue{
     cursor: pointer;
     text-align: end;
+    text-decoration: none;
     color: var(--blue);
     font-weight: bold;
 }

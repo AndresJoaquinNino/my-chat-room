@@ -1,12 +1,15 @@
 import useAuthContext from "../hooks/useAuthContext";
 import './SignIn.css';
 import ChatIcon from '@mui/icons-material/Chat';
+import { NavLink } from "react-router-dom";
 
 const SignIn = () => {
     const { isLog, setLog } = useAuthContext();
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setLog(!isLog)
+        console.log('isLog = ',isLog)
     }
     return (
         <div className="wrapper">
@@ -22,7 +25,7 @@ const SignIn = () => {
                     <fieldset className="form-group">
                         <label className="form-label" htmlFor="password">Password:</label>
                         <input className="form-input" type="text" name='password' placeholder="..."/>
-                        <span className="link-blue">Forgot password?</span>
+                        <NavLink to='/ForgotPassword' className="link-blue">Forgot password?</NavLink>
                     </fieldset>
                     <button className="button-blue" type="submit">
                         Sign In
@@ -42,7 +45,7 @@ const SignIn = () => {
             </div>
             <div className="card padding-card-tiny">
                 <p>
-                    Don't have account? <span className="link-blue">Register</span>
+                    Don't have account? <NavLink to='/Register' className="link-blue">Register</NavLink>
                 </p>
             </div>
         </div>
