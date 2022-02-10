@@ -1,16 +1,23 @@
-import useAuthContext from "../hooks/useAuthContext";
 import './SignIn.css';
 import ChatIcon from '@mui/icons-material/Chat';
+import useAuthContext from "../hooks/useAuthContext";
+import { auth } from '../config/firebase'
+import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 
 const SignIn = () => {
-    const { isLog, setLog } = useAuthContext();
+    //const { isLog, setLog } = useAuthContext();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setLog(!isLog)
-        console.log('isLog = ',isLog)
+        console.log(auth)
     }
+
+    const googleAuth = () =>{
+        const provider = new GoogleAuthProvider();
+        signInWithRedirect(auth,provider);
+    }
+
     return (
         <div className="wrapper">
             <div className="card">
@@ -37,7 +44,7 @@ const SignIn = () => {
                         o
                         <hr/>
                     </span>
-                    <button className="card-auth">
+                    <button className="card-auth" onClick={googleAuth}>
                         <img className="card-icon" src='https://img.icons8.com/color/48/000000/google-logo.png' alt='Google Icon' />
                         Sign in With Google
                     </button>
