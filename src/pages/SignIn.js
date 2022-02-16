@@ -6,7 +6,8 @@ import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 
 const SignIn = () => {
-    //const { isLog, setLog } = useAuthContext();
+    const [login] = useAuthContext();
+    console.log("login = ",login)
 
     const handleSubmit = (event) => {
         event.preventDefault();
