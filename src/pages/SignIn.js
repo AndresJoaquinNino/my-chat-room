@@ -1,14 +1,10 @@
 import './SignIn.css';
 import ChatIcon from '@mui/icons-material/Chat';
-import useAuthContext from "../hooks/useAuthContext";
 import { auth } from '../config/firebase'
 import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 
 const SignIn = () => {
-    const [login] = useAuthContext();
-    console.log("login = ",login)
-
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(auth)

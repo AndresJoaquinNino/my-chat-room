@@ -3,9 +3,9 @@ import { useContext } from "react"
 
 const useAuthContext = () => {
     const context = useContext(AuthContext);
-    const { login, loading } = context;
+    const { isLog,logout } = context;
     if(!context) throw new Error('There is no AuthContext')
-    return [login, loading];
+    return [isLog,logout];
 }
 
 export default useAuthContext;

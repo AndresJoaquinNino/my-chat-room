@@ -1,24 +1,27 @@
-import { createContext, useEffect, useState } from "react";
-import { auth } from '../config/firebase'
-import { onAuthStateChanged } from 'firebase/auth';
+import { createContext, useEffect } from "react";
+import { auth } from '../config/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useSessionStorage } from '../hooks/useSessionStorage';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const login = sessionStorage.getItem("chat-session")
+    const [isLog, setSession, deleteSession] = useSessionStorage('userSession',true);
+
     useEffect(() => {
-        const logState = onAuthStateChanged(auth, (user) => {
-            if(user){
-                sessionStorage.setItem("chat-session",true)
-            }else{
-                sessionStorage.setItem("chat-session",false)
-            }
+        const listener = onAuthStateChanged(auth, (user) => {
+            setSession(user != null);
         })
-        return logState()
-    },[])
+        return listener()
+    },[setSession])
+
+    const logout = () => {
+        signOut(auth);
+        deleteSession();
+    }
 
     return (
-        <AuthContext.Provider value={{login}}>
+        <AuthContext.Provider value={{isLog,logout}}>
             { children }
         </AuthContext.Provider>
     );

@@ -2,6 +2,7 @@ import { AuthProvider } from './context/AuthContext'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import SignIn from './pages/SignIn'
 import Home from './pages/Home'
+import Chat from './pages/Chat'
 import RequireAuth from './components/RequireAuth'
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
                 <Route path="/forgotPassword" element={<h1>Forgot Password</h1>} />
                 <Route path="/chat" element={
                     <RequireAuth>
-                        <h1>Chat</h1>
+                        <Chat/>
                     </RequireAuth>
                 } />
                 <Route path="*" element={<h1>404</h1>} />
