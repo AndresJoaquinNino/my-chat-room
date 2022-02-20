@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom"
-
 const Home = () => {
     return(
         <>
@@ -7,12 +5,7 @@ const Home = () => {
             <h1>Welcome to My Chat Room</h1>
         </header>
         <section>
-            <p>
-                This is a project for my portafolio
-            </p>
-            <p>
-                Go to <NavLink to='/Login'> Login Page </NavLink>
-            </p>
+            <h1>Select you chat</h1>
         </section>
         </>
     )

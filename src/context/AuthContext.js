@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
             setSession(user != null);
         })
         return listener()
-    },[setSession])
+    },[])
 
     const logout = () => {
         signOut(auth);

@@ -1,10 +1,11 @@
 import { Navigate, useLocation } from "react-router-dom";
-import useAuthContext from "../hooks/useAuthContext"
+import useAuthContext from "../hooks/useAuthContext";
 
-const RequireAuth = ({children}) =>  {
+const RequireAuth = ({children, alternative, needAuth}) =>  {
     const [ isLog ] = useAuthContext();
     const location = useLocation();
-    if(isLog === false) return <Navigate to="/login" state={{ from: location }} replace />;
+    const result = typeof alternative === 'object' ? alternative : <Navigate to={alternative} state={{ from: location }} replace />;
+    if(isLog !== needAuth) return result;
     return( children )
 }
 
