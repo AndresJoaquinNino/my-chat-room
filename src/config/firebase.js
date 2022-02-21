@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore, collection } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -10,6 +11,10 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-const firebaseApp = initializeApp(firebaseConfig); // Iniciando firebase app
+const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth(firebaseApp);
+
+const database = getFirestore(firebaseApp);
+
+export const messagesCollection = collection(database,"messages");
