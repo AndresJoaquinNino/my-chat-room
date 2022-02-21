@@ -1,6 +1,6 @@
 import { AuthProvider } from './context/AuthContext'
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from './pages/Home'
+import Chat from './pages/Chat'
 import Landing from './pages/Landing'
 import SignIn from './pages/SignIn'
 import RequireAuth from './components/RequireAuth'
@@ -12,12 +12,12 @@ function App() {
             <Routes>
                 <Route path="/" element={
                     <RequireAuth needAuth={true} alternative={<Landing/>}>
-                        <Home/>
+                        <Chat/>
                     </RequireAuth>
                 } />
                 <Route path="/login" element={
                     <RequireAuth needAuth={false} alternative="/">
-                        <SignIn />
+                        <SignIn/>
                     </RequireAuth>
                 } />
                 <Route path="*" element={<h1>404</h1>} />
