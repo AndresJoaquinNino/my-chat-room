@@ -4,6 +4,7 @@
     --grey: #2A2F32;
     --blue: #426ADD;
     --blue-d: hsl(225, 70%, 46%);
+    --blue-l: hsl(225, 70%, 60%);
     --white: #fff;
 }
 *{
