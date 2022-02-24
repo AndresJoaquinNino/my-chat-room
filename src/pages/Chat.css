@@ -1,9 +1,9 @@
 :root{
     --chat-width: 662px;
-    --header-h: 5vh;
-    --body-h: 80vh;
-    --footer-h: 7.5vh;
-    --font-size: 1.2rem;
+    --header-h: 2.5em;
+    --footer-h: 4em;
+    --body-h: calc(100% - var(--footer-h) - var(--header-h));
+    --font-size: 1.25rem;
 }
 .chat-wrapper{
     position: absolute;
@@ -20,15 +20,20 @@
                 CHAT HEADER
 ================================================*/
 .chat-header{
-    height: 5%;
+    position: fixed;
+    width: 100%;
+    max-width: var(--chat-width);
+    height: var(--header-h);
+    background-color: var(--blue);
+}
+.text-header{
     width: 95%;
     padding: 0 2.5%;
-    background-color: var(--blue);
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 .button-icon{
     border: none;
     cursor: pointer;
@@ -43,7 +48,10 @@
                 CHAT MESSAGES
 ================================================*/
 .chat-body{
-    height: 87.5%;
+    width: 100%;
+    max-width: var(--chat-width);
+    margin-top: var(--header-h);
+    height: var(--body-h);
     background-color: var(--grey);
     display: flex;
     flex-direction: column;
@@ -51,11 +59,11 @@
 }
 .chat-messages{
     list-style: none;
-    width: 95%;
+    overflow-y: auto;
+    padding: 0.5em;
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    overflow-y: auto;
 }
 .message{
     display: flex;
@@ -84,18 +92,23 @@
                 CHAT FOOTER
 ================================================*/
 .chat-footer{
-    height: 7.5%;
+    position: fixed;
+    width: 100%;
+    max-width: var(--chat-width);
+    height: var(--footer-h);
     background-color: var(--black-l);
+    bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5em;
 }
 .chat-input{
+    width: 80%;
     color: var(--white);
     font-size: var(--font-size);
     border: 0.1em solid var(--grey);
-    padding: 0.25em 0.25em;
+    padding: 0.25em 0.4em;
 }
 .chat-button{
     border: none;

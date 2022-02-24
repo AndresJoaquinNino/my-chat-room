@@ -6,7 +6,7 @@ import useCollection from '../hooks/useCollection';
 import useAuthContext from '../hooks/useAuthContext';
 import SendIcon from '@mui/icons-material/Send';
 import LogoutIcon from '@mui/icons-material/Logout';
-
+import ScrollToBottom from '../components/ScrollToBottom'
 const Chat = () => {
     const [isLog, logout] = useAuthContext();
     const customOrder = orderBy("createAt","asc");
@@ -37,37 +37,36 @@ const Chat = () => {
 
     return(
         <div className='chat-wrapper'>
-            <main className='chat-container'>
-                <header className='chat-header'>
-                    <h2 className='text-header'>
-                        Main Chat
-                    </h2>
+            <header className='chat-header'>
+                <div className='text-header'>
+                    <h2> Main Chat </h2>
                     <button onClick={logout} className='button-icon'>
                         <LogoutIcon/>
                     </button>
-                </header>
-                <section className="chat-body">
-                    <ul className="chat-messages">
-                        {
-                            !loading
-                            &&
-                            messages.map((doc) => <Message key={doc.id} messageData={doc.data()}/>)
-                        }
-                        {
-                            loading
-                            &&
-                            <h1>Loading...</h1>
-                        }
-                    </ul>
-                </section>
-                <form className='chat-footer' onSubmit={handleSubmit}>
-                    <input type="text" className='chat-input' onChange={handleChange}
-                     value={message} placeholder='Write a message'/>
-                    <button className='chat-button'>
-                        <SendIcon sx={{ fontSize: "1.5rem" }}/>
-                    </button>
-                </form>
-            </main>
+                </div>
+            </header>
+            <section className="chat-body">
+                <ul className="chat-messages">
+                    {
+                        !loading
+                        &&
+                        messages.map((doc) => <Message key={doc.id} messageData={doc.data()}/>)
+                    }
+                    {
+                        loading
+                        &&
+                        <h1>Loading...</h1>
+                    }
+                    <ScrollToBottom dependence={messages}/>
+                </ul>
+            </section>
+            <form className='chat-footer' onSubmit={handleSubmit}>
+                <input type="text" className='chat-input' onChange={handleChange}
+                    value={message} placeholder='Write a message'/>
+                <button className='chat-button'>
+                    <SendIcon sx={{ fontSize: "1.5rem" }}/>
+                </button>
+            </form>
         </div>
     );
 }
