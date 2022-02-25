@@ -74,13 +74,27 @@
     flex-direction: row-reverse;
 }
 .text-message{
+    max-width: calc(100% - 5.75em);
     background-color: var(--black-l);
     border-radius: 0.25em;
     padding: 0.5em;
     font-size: var(--font-size);
+    display: flex;
+    flex-direction: column;
+    gap: .1em;
 }
 .text-message-user{
     background-color: var(--blue-l);
+}
+.user-message{
+    font-size: 0.95rem;
+}
+.label-message{
+    font-size: 0.7rem;
+    align-self: flex-end;
+}
+.label-message-user{
+    align-self: flex-start;
 }
 .avatar{
     --size: 2em;
