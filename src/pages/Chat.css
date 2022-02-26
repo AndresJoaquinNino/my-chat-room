@@ -4,6 +4,7 @@
     --footer-h: 4em;
     --body-h: calc(100% - var(--footer-h) - var(--header-h));
     --font-size: 1.25rem;
+    --ext-width-message: 1.5em;
 }
 .chat-wrapper{
     position: absolute;
@@ -65,42 +66,44 @@
     flex-direction: column;
     gap: 0.5em;
 }
-.message{
+.container-message{
     display: flex;
     align-items: center;
     gap: 1em;
 }
-.message-user{
+.container-message-user{
     flex-direction: row-reverse;
 }
-.text-message{
-    max-width: calc(100% - 5.75em);
+.box-message{
+    width: auto;
+    max-width: calc(100% - 5.75em - var(--ext-width-message));
     background-color: var(--black-l);
     border-radius: 0.25em;
-    padding: 0.5em;
+    padding: 0.5em var(--ext-width-message) 0.5em 0.5em;
     font-size: var(--font-size);
     display: flex;
     flex-direction: column;
     gap: .1em;
 }
-.text-message-user{
+.box-message-user{
     background-color: var(--blue-l);
 }
-.user-message{
-    font-size: 0.95rem;
-}
 .label-message{
+    margin-right: calc(var(--ext-width-message) * -1);
     font-size: 0.7rem;
     align-self: flex-end;
 }
 .label-message-user{
-    align-self: flex-start;
 }
 .avatar{
     --size: 2em;
     width: var(--size);
     height: var(--size);
     border-radius: 50%;
+}
+.user-message{
+    color: hsl(225, 70%, 65%);
+    font-size: 0.95rem;
 }
 /*================================================
                 CHAT FOOTER

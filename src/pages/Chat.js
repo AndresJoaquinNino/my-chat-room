@@ -4,12 +4,12 @@ import { query, where, orderBy, serverTimestamp, addDoc } from "firebase/firesto
 import { messagesCollection, auth } from '../config/firebase';
 import useCollection from '../hooks/useCollection';
 import useAuthContext from '../hooks/useAuthContext';
+import { useLongPress } from 'use-long-press';
 import SendIcon from '@mui/icons-material/Send';
 import LogoutIcon from '@mui/icons-material/Logout';
 import ScrollToBottom from '../components/ScrollToBottom'
 import moment from 'moment';
 
-const usersColor = {};
 
 const Chat = () => {
 
@@ -51,15 +51,11 @@ const Chat = () => {
             </header>
             <section className="chat-body">
                 <ul className="chat-messages">
-                    {
-                        !loading
-                        &&
-                        messages.map((doc) => <Message key={doc.id} messageData={doc.data()}/>)
-                    }
+
                     {
                         loading
-                        &&
-                        <h1>Loading...</h1>
+                        ? <h1>Loading...</h1>
+                        : messages.map((doc) => <Message key={doc.id} messageData={doc.data()}/>)
                     }
                     <ScrollToBottom dependence={messages}/>
                 </ul>
@@ -80,32 +76,27 @@ const Message = ({messageData}) => {
     const messageDate = createAt ? createAt.toDate() : new Date();
     const messageTime = moment(messageDate).format('hh:mm A');
     const userId = auth.currentUser.uid;
-    const userMessage = userId === uid;
-    usersColor[uid] = usersColor[uid] ? usersColor[uid] : getRandomColor();
+    const isUserMessage = userId === uid;
+    const avatarPhoto = photoURL || '../img/avatardefault.png';
+
+    const bind = useLongPress(() => {
+        alert('Long pressed!');
+    },{detect: 'touch',threshold:500});
 
     return(
-        <li className={`message ${userMessage ? 'message-user':''}`}>
-            <img className='avatar' src={photoURL || '../img/avatardefault.png'} alt=''/>
-            <p className={`text-message ${userMessage ? 'text-message-user':''}`} >
+        <li className={`container-message ${isUserMessage ? 'container-message-user':''}`}>
+            <img className='avatar' src={avatarPhoto} alt=''/>
+            <p className={`box-message ${isUserMessage ? 'box-message-user':''}`} {...bind}>
                 {
-                    !userMessage
+                    !isUserMessage
                     &&
-                    <span className='user-message' style={{'color': usersColor[uid]}}>{displayName}</span>
+                    <span className='user-message'>{displayName}</span>
                 }
                 <span>{message}</span>
-                <span className={`label-message ${userMessage ? 'label-message-user':''}`}>{messageTime}</span>
+                <span className={`label-message ${isUserMessage ? 'label-message-user':''}`}>{messageTime}</span>
             </p>
         </li>
     )
-}
-
-const getRandomColor = () => {
-    const characters = '0123456789ABCDEF';
-    let color = '#';
-    for(let i = 0; i < 6; i++){
-        color += characters[Math.floor(Math.random() * 16)];
-    }
-    return color;
 }
 
 export default Chat;
