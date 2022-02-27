@@ -1,4 +1,4 @@
-import './Chat.css';
+import './Chat.scss';
 import { useState } from "react";
 import { query, where, orderBy, serverTimestamp, addDoc } from "firebase/firestore";
 import { messagesCollection, auth } from '../config/firebase';
@@ -40,30 +40,25 @@ const Chat = () => {
     }
 
     return(
-        <div className='chat-wrapper'>
+        <div className='chat'>
             <header className='chat-header'>
-                <div className='text-header'>
-                    <h2> Main Chat </h2>
-                    <button onClick={logout} className='button-icon'>
-                        <LogoutIcon/>
-                    </button>
-                </div>
+                <h2> Main Chat </h2>
+                <button onClick={logout} className='button-transparent'>
+                    <LogoutIcon/>
+                </button>
             </header>
-            <section className="chat-body">
-                <ul className="chat-messages">
-
-                    {
-                        loading
-                        ? <h1>Loading...</h1>
-                        : messages.map((doc) => <Message key={doc.id} messageData={doc.data()}/>)
-                    }
-                    <ScrollToBottom dependence={messages}/>
-                </ul>
-            </section>
+            <ul className="chat-body">
+                {
+                    loading
+                    ? <h1>Loading...</h1>
+                    : messages.map((doc) => <Message key={doc.id} messageData={doc.data()}/>)
+                }
+                <ScrollToBottom dependence={messages}/>
+            </ul>
             <form className='chat-footer' onSubmit={handleSubmit}>
                 <input type="text" className='chat-input' onChange={handleChange}
                     value={message} placeholder='Write a message'/>
-                <button className='chat-button'>
+                <button className='button-circle'>
                     <SendIcon sx={{ fontSize: "1.5rem" }}/>
                 </button>
             </form>
@@ -84,16 +79,16 @@ const Message = ({messageData}) => {
     },{detect: 'touch',threshold:500});
 
     return(
-        <li className={`container-message ${isUserMessage ? 'container-message-user':''}`}>
+        <li className={isUserMessage ? 'message-container-user':'message-container'}>
             <img className='avatar' src={avatarPhoto} alt=''/>
-            <p className={`box-message ${isUserMessage ? 'box-message-user':''}`} {...bind}>
+            <p className={isUserMessage ? 'message-box-user':'message-box'} {...bind}>
                 {
                     !isUserMessage
                     &&
-                    <span className='user-message'>{displayName}</span>
+                    <span className='message-user-name'>{displayName}</span>
                 }
                 <span>{message}</span>
-                <span className={`label-message ${isUserMessage ? 'label-message-user':''}`}>{messageTime}</span>
+                <span className='message-time align-self-end'>{messageTime}</span>
             </p>
         </li>
     )

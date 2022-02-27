@@ -51,26 +51,6 @@
         padding: 0.2em 0.5em;
     }
 }
-.button-blue{
-    cursor: pointer;
-    width: 100%;
-    color: #fff;
-    background-color: $primary-l-color2;
-    border: none;
-    border-radius: 0.25em;
-    padding: .25em 1em;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-.button-auth{
-    cursor: pointer;
-    width: 100%;
-    border: none;
-    border-radius: 0.25em;
-    padding: .25em 1em;
-    font-size: 1.1rem;
-    @include flexCenter(row, 0.5em);
-}
 .icon{
     $size-icon: 1.2em;
     width: $size-icon;
@@ -79,8 +59,9 @@
 .link-blue{
     cursor: pointer;
     text-decoration: none;
-    color: $primary-l-color2;
+    color: $primary-l-color;
     font-weight: bold;
 }
 
+@import '../scss/buttons';
 @import '../scss/util';

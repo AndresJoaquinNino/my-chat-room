@@ -1,0 +1,108 @@
+@import '../scss/colors';
+@import '../scss/reset';
+@import '../scss/mixins';
+
+$max-width: 662px;
+$header-height: 2.5em;
+$footer-height: 4em;
+$avatar-size: 2em;
+
+@function p-message($isUser: true){
+    @if $isUser == true {
+        @return 0 0 0 ($avatar-size + 0.5em);
+    }
+    @return 0 ($avatar-size + 0.5em) 0 0;
+}
+
+@mixin chatWidth {
+    width: 100%;
+    max-width: $max-width;
+}
+
+.chat{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &-header{
+        @include chatWidth;
+        background-color: $primary-l-color;
+        height: $header-height;
+        padding: 0 1em;
+        position: fixed;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &-body{
+        @include chatWidth;
+        background-color: $main-l-color;
+        padding: ($header-height + 0.5em) 0.5em ($footer-height + 0.5em) 0.5em;
+        height: 100vh;
+        list-style: none;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+    &-footer{
+        @include chatWidth;
+        @include flexCenter(row,1em);
+        background-color: $main-color;
+        height: $footer-height;
+        position: fixed;
+        bottom: 0;
+    }
+    &-input{
+        width: 80%;
+        color: #fff;
+        font-size: 1.25rem;
+        border: 0.1em solid $main-l-color;
+        padding: 0.25em 0.4em;
+        border-radius: 0.25em;
+    }
+}
+
+.message{
+    &-container{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        gap: 0.5em;
+    }
+    &-container-user{
+        @extend .message-container;
+        justify-content: end;
+        flex-direction: row-reverse;
+    }
+    &-box{
+        max-width: calc(100% - $avatar-size - 3em);
+        background-color: $main-color;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        padding: 0.75em;
+        border-radius: 0.25em;
+    }
+    &-box-user{
+        @extend .message-box;
+        background-color: $primary-l-color;
+    }
+    &-user-name{
+        color: $primary-l-color;
+    }
+    &-time{
+        font-size: 0.8rem;
+    }
+}
+.avatar{
+    width: $avatar-size;
+    height: $avatar-size;
+    border-radius: 50%;
+}
+
+@import '../scss/buttons';
+@import '../scss/util';
