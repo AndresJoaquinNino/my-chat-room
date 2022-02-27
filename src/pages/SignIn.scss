@@ -1,0 +1,86 @@
+@import '../scss/colors';
+@import '../scss/reset';
+@import '../scss/mixins';
+
+.wrapper{
+    @include flexCenter(column, 1em);
+    position: absolute;
+    width: 100%;
+    min-height: 100%;
+}
+.card{
+    @include flexCenter(column, 0.5em);
+    background-color: $main-l-color;
+    width: 100%;
+    max-width: 450px;
+    padding: 2em 3em;
+    border-radius: 0.25em;
+    box-shadow: .8rem .8rem .35rem rgb(0, 0, 0, 0.2);
+    &-header{
+        @include flexCenter(row, .25em);
+        flex-wrap: wrap-reverse;
+        margin-bottom: 2em
+    }
+    &-body{
+        @include flexCenter(column, 1em);
+        width: 100%;
+    }
+    &-footer{
+        @include flexCenter(column, 1em);
+        width: 100%;
+    }
+}
+.form{
+    &-group{
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        width: 100%;
+    }
+    &-label{
+        font-weight: bold;
+        font-size: 1.15rem;
+        padding: 0 0.5em;
+    }
+    &-input{
+        color: #ffffff;
+        border: 0.1em solid #fff;
+        border-radius: 0.25em;
+        background-color: transparent;
+        font-size: 1.15rem;
+        padding: 0.2em 0.5em;
+    }
+}
+.button-blue{
+    cursor: pointer;
+    width: 100%;
+    color: #fff;
+    background-color: $primary-l-color2;
+    border: none;
+    border-radius: 0.25em;
+    padding: .25em 1em;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.button-auth{
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    border-radius: 0.25em;
+    padding: .25em 1em;
+    font-size: 1.1rem;
+    @include flexCenter(row, 0.5em);
+}
+.icon{
+    $size-icon: 1.2em;
+    width: $size-icon;
+    height: $size-icon;
+}
+.link-blue{
+    cursor: pointer;
+    text-decoration: none;
+    color: $primary-l-color2;
+    font-weight: bold;
+}
+
+@import '../scss/util';

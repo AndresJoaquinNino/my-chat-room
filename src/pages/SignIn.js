@@ -1,4 +1,4 @@
-import './SignIn.css';
+import './SignIn.scss';
 import ChatIcon from '@mui/icons-material/Chat';
 import { auth } from '../config/firebase'
 import { GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
@@ -29,7 +29,7 @@ const SignIn = () => {
                     <fieldset className="form-group">
                         <label className="form-label" htmlFor="password">Password:</label>
                         <input className="form-input" type="text" name='password' placeholder="..."/>
-                        <NavLink to='/ForgotPassword' className="link-blue">Forgot password?</NavLink>
+                        <NavLink to='/ForgotPassword' className="link-blue align-self-end px-1">Forgot password?</NavLink>
                     </fieldset>
                     <button className="button-blue" type="submit">
                         Sign In
@@ -41,13 +41,13 @@ const SignIn = () => {
                         o
                         <hr/>
                     </span>
-                    <button className="card-auth" onClick={googleAuth}>
-                        <img className="card-icon" src='https://img.icons8.com/color/48/000000/google-logo.png' alt='Google Icon' />
+                    <button className="button-auth" onClick={googleAuth}>
+                        <img className="icon" src='https://img.icons8.com/color/48/000000/google-logo.png' alt='Google Icon' />
                         Sign in With Google
                     </button>
                 </footer>
             </div>
-            <div className="card padding-card-tiny">
+            <div className="card py-1">
                 <p>
                     Don't have account? <NavLink to='/Register' className="link-blue">Register</NavLink>
                 </p>

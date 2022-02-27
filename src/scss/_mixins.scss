@@ -1,0 +1,9 @@
+@mixin flexCenter($direction,$gap: 0){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+    @if($gap != 0){
+        gap: $gap;
+    }
+}

@@ -1,0 +1,28 @@
+@each $space in (0, 1, 2, 3, 4, 5) {
+    .p-#{$space}{
+        padding: #{$space}em;
+    }
+    .py-#{$space}{
+        padding: #{$space}em 0;
+    }
+    .px-#{$space}{
+        padding: 0 #{$space}em ;
+    }
+}
+
+@each $align in (start, center, end) {
+    .align-self-#{$align}{
+        align-self: #{$align};
+    }
+}
+
+.dividers-row{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    hr{
+        width: 100%;
+    }
+}
