@@ -15,6 +15,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 export const auth = getAuth(firebaseApp);
 
-const database = getFirestore(firebaseApp);
+export const database = getFirestore(firebaseApp);
 
 export const messagesCollection = collection(database,"messages");

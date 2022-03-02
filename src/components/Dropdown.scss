@@ -1,0 +1,25 @@
+@import '../scss/colors';
+@import '../scss/mixins';
+
+
+.relative{
+    position: relative;
+}
+.dropdown{
+    @include flexCenter(column,0.5em);
+    border-radius: 0.25em;
+    padding: 1em;
+    margin: 0 0.5em;
+    background-color: hsl(210, 8%, 25%);
+    transform: translateY(-50%);
+    position: absolute;
+    z-index: 1;
+    .option{
+        @include flexCenter(row);
+        width: 100%;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+    }
+}
