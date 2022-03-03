@@ -28,14 +28,12 @@ const Chat = () => {
         const data = {
             createAt : serverTimestamp(),
             message,
+            likes:[],
+            dislikes:[],
             author:{
                 uid,
                 photoURL,
                 displayName,
-            },
-            interactions:{
-                likes:[],
-                dislikes:[]
             }
         }
         addDoc(messagesCollection,data);

@@ -1,6 +1,6 @@
 import './Dropdown.scss';
 import { auth, database } from '../config/firebase';
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import ReplyIcon from '@mui/icons-material/Reply';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
@@ -17,17 +17,26 @@ const Dropdown = ({messageData,changeState}) =>{
         changeState(false);
     }
 
-    const toggleInteraction =  (interaction) => {
-        const { msgId, interactions } = messageData
-        console.log('interactions = ',interactions)
+    const toggleInteraction =  (sendInteraction) => {
+        const { msgId, likes, dislikes } = messageData
         const messageRef = doc(database, "messages", msgId);
-        /*
-            updateDoc(messageRef, {
-                interactions:{
-                    likes: arrayUnion(auth.currentUser.uid)
-                }
-            });
-        */
+        const userId = auth.currentUser.uid
+        const isInLikes = likes.includes(userId)
+        const isInDislikes = dislikes.includes(userId)
+        if(sendInteraction === 'likes'){
+            const objUpdate = {
+                likes: isInLikes ? arrayRemove(userId) : arrayUnion(userId)
+            }
+            if(isInDislikes) objUpdate.dislikes = arrayRemove(userId)
+            updateDoc(messageRef, objUpdate);
+        }
+        if(sendInteraction === 'dislikes'){
+            const objUpdate = {
+                dislikes: isInDislikes ? arrayRemove(userId) : arrayUnion(userId)
+            }
+            if(isInLikes) objUpdate.likes = arrayRemove(userId)
+            updateDoc(messageRef, objUpdate);
+        }
     }
 
     return(
@@ -42,7 +51,7 @@ const Dropdown = ({messageData,changeState}) =>{
                 <button className='option' onClick={() => toggleInteraction('likes')}>
                     <ThumbUpIcon   sx={customStyle}/>
                 </button>
-                <button className='option'>
+                <button className='option' onClick={() => toggleInteraction('dislikes')}>
                     <ThumbDownIcon  sx={customStyle}/>
                 </button>
             </div>

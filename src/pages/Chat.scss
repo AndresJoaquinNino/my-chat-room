@@ -57,7 +57,14 @@ $footer-height: 4em;
         border-radius: 0.25em;
     }
 }
-
+.relative{
+    position: relative;
+}
+.reaction{
+    position: absolute;
+    z-index: 1;
+    @include flexCenter(row,0.5em);
+}
 
 
 @import '../scss/buttons';
