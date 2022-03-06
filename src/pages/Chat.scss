@@ -38,7 +38,7 @@ $footer-height: 4em;
         overflow-y: scroll;
         display: flex;
         flex-direction: column;
-        gap: 1em;
+        gap: 1.5em;
     }
     &-footer{
         @include chatWidth;
@@ -56,14 +56,6 @@ $footer-height: 4em;
         padding: 0.25em 0.4em;
         border-radius: 0.25em;
     }
-}
-.relative{
-    position: relative;
-}
-.reaction{
-    position: absolute;
-    z-index: 1;
-    @include flexCenter(row,0.5em);
 }
 
 

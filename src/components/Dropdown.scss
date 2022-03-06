@@ -23,3 +23,7 @@
         color: #fff;
     }
 }
+.dropdown-user{
+    @extend .dropdown;
+    transform: translate(-135%,-50%)
+}

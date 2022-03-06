@@ -7,9 +7,9 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const Dropdown = ({messageData,changeState}) =>{
-    const customStyle = {
-        fontSize: '1rem'
-    }
+
+    const userId = auth.currentUser.uid;
+    const isUserMessage = userId === messageData.author.uid;
 
     const copyInClipboard = () => {
         const { message } = messageData;
@@ -20,41 +20,36 @@ const Dropdown = ({messageData,changeState}) =>{
     const toggleInteraction =  (sendInteraction) => {
         const { msgId, likes, dislikes } = messageData
         const messageRef = doc(database, "messages", msgId);
-        const userId = auth.currentUser.uid
         const isInLikes = likes.includes(userId)
         const isInDislikes = dislikes.includes(userId)
+        const objUpdate = {};
         if(sendInteraction === 'likes'){
-            const objUpdate = {
-                likes: isInLikes ? arrayRemove(userId) : arrayUnion(userId)
-            }
+            objUpdate.likes = isInLikes ? arrayRemove(userId) : arrayUnion(userId)
             if(isInDislikes) objUpdate.dislikes = arrayRemove(userId)
-            updateDoc(messageRef, objUpdate);
         }
         if(sendInteraction === 'dislikes'){
-            const objUpdate = {
-                dislikes: isInDislikes ? arrayRemove(userId) : arrayUnion(userId)
-            }
+            objUpdate.dislikes = isInDislikes ? arrayRemove(userId) : arrayUnion(userId)
             if(isInLikes) objUpdate.likes = arrayRemove(userId)
-            updateDoc(messageRef, objUpdate);
         }
+        updateDoc(messageRef, objUpdate);
     }
 
+    const customStyle = { fontSize: '1rem' };
+
     return(
-        <div className="relative">
-            <div className="dropdown">
-                <button className='option'>
-                    <ReplyIcon sx={customStyle}/>
-                </button>
-                <button className='option' onClick={copyInClipboard}>
-                    <ContentCopyIcon sx={customStyle}/>
-                </button>
-                <button className='option' onClick={() => toggleInteraction('likes')}>
-                    <ThumbUpIcon   sx={customStyle}/>
-                </button>
-                <button className='option' onClick={() => toggleInteraction('dislikes')}>
-                    <ThumbDownIcon  sx={customStyle}/>
-                </button>
-            </div>
+        <div className={isUserMessage ? 'dropdown-user' : 'dropdown'}>
+            <button className='option'>
+                <ReplyIcon sx={customStyle}/>
+            </button>
+            <button className='option' onClick={copyInClipboard}>
+                <ContentCopyIcon sx={customStyle}/>
+            </button>
+            <button className='option' onClick={() => toggleInteraction('likes')}>
+                <ThumbUpIcon   sx={customStyle}/>
+            </button>
+            <button className='option' onClick={() => toggleInteraction('dislikes')}>
+                <ThumbDownIcon  sx={customStyle}/>
+            </button>
         </div>
     )
 }

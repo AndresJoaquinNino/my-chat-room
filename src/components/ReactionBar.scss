@@ -1,0 +1,22 @@
+@import '../scss/colors';
+@import '../scss/reset';
+@import '../scss/mixins';
+
+.reactions{
+    position: absolute;
+    z-index: 1;
+    @include flexCenter(row,0.1em);
+}
+
+.circle{
+    border: 0.15em solid $main-l-color;
+    background-color: $main-color;
+    border-radius: 50%;
+    padding: 0.3em 0.25em;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.2em;
+}
+
+@import '../scss/util';
