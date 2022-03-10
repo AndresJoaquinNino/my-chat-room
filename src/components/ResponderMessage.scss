@@ -1,0 +1,55 @@
+@import '../scss/colors';
+@import '../scss/mixins';
+
+$max-width: 662px;
+$footer-height: 4em;
+@mixin chatWidth {
+    width: 100%;
+    max-width: $max-width;
+}
+
+
+.response-message{
+    @include chatWidth;
+    @include flexCenter(row);
+    height: 5em;
+    background-color: $main-color;
+    padding: 1em 1em 0 1em ;
+    position: fixed;
+    margin-bottom: $footer-height;
+    bottom: 0;
+}
+.container-message{
+    background-color: $main-l-color;
+    height: 100%;
+    width: 95%;
+    border-radius: 0.5em;
+    display: flex;
+}
+.border{
+    border-radius: 0.5em 0 0 0.5em;
+    background-color: $grey-color;
+    height: 100%;
+    width: 0.75em;
+}
+.content{
+    width: 100%;
+    padding: 0 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.content-header{
+    color: $primary-l-color;
+}
+.circle-icon{
+    @include flexCenter(row);
+    $size: 1.5em;
+    width: $size;
+    height: $size;
+    background-color: $grey-color;
+    color: $main-color;
+    border-radius: 50%;
+    transform: translate(25%,-25%);
+    cursor: pointer;
+}
