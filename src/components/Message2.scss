@@ -1,0 +1,91 @@
+@import '../scss/colors';
+@import '../scss/reset';
+$avatar-size: 2em;
+
+.avatar{
+    width: $avatar-size;
+    height: $avatar-size;
+    border-radius: 50%;
+}
+.message{
+    &-received{
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 0.5em;
+    }
+    &-section{
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+    &-box{
+        max-width: calc(100% - $avatar-size - 5em);
+        background-color: $main-color;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25em;
+        padding: 0.75em;
+        border-radius: 0.25em;
+    }
+    &-send{
+        @extend .message-received;
+        justify-content: flex-end;
+        flex-direction: row-reverse;
+    }
+    &-section-send{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    &-box-send{
+        @extend .message-box;
+        background-color: $primary-l-color;
+    }
+    &-option{
+        cursor: pointer;
+        font-size: 1.25rem;
+    }
+    &-header{
+        color: $primary-l-color;
+    }
+    &-time{
+        font-size: 0.8rem;
+    }
+}
+
+.tiny-responder{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 3em;
+    $border-radius: 0.5em;
+    &-container{
+        width: 100%;
+        height: 100%;
+        background-color: $main-l-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 0.25em;
+        border-radius: 0 $border-radius $border-radius 0;
+    }
+    &-border{
+        border-radius: $border-radius 0 0 $border-radius;
+        background-color: $grey-color;
+        height: 100%;
+        width: 0.75em;
+    }
+    &-header{
+        color: $primary-l-color;
+    }
+    &-content{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}

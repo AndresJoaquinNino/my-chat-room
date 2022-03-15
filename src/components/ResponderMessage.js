@@ -1,23 +1,25 @@
 import './ResponderMessage.scss';
-
-const ResponderMessage = () => {
+import { auth } from '../config/firebase';
+const ResponderMessage = ({ messageData, responseMessage = '' }) => {
+    const { author, message } = messageData;
+    const isCurrentUser = author.uid === auth.currentUser.uid
     return(
-        <section className="response-message">
-            <div className="container-message">
-                <div className='border'></div>
-                <div className='content'>
-                    <span className='content-header'>
-                        Andrés
-                    </span>
-                    <span className='content-text'>
-                        Es momento de que respondas este mensaje jovencito.
-                    </span>
-                </div>
+        <div className="responder">
+            <div className="responder-container">
+                <div className='responder-border'></div>
+                <section className='responder-content'>
+                    <header className='responder-header'>
+                        { isCurrentUser ? 'Me' : author.displayName }
+                    </header>
+                    <span> { message } </span>
+                </section>
                 <div className="relative">
-                    <div className="circle-icon">X</div>
+                    <button className="circle-icon" onClick={() => responseMessage({ status: false, data: {} })}>
+                        X
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
     )
 }
 export default ResponderMessage

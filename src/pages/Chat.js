@@ -1,33 +1,23 @@
 import './Chat.scss';
-import Message from '../components/Message';
-import { useState } from "react";
-import { query, orderBy, serverTimestamp, addDoc } from "firebase/firestore";
-import { messagesCollection, auth } from '../config/firebase';
-import useCollection from '../hooks/useCollection';
-import useAuthContext from '../hooks/useAuthContext';
-import SendIcon from '@mui/icons-material/Send';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ScrollToBottom from '../components/ScrollToBottom'
-
+import SendIcon from '@mui/icons-material/Send';
+import { messagesCollection, auth } from '../config/firebase';
+import { query, orderBy,  serverTimestamp, addDoc } from "firebase/firestore";
+import useCollection from '../hooks/useCollection';
+import Message from '../components/Message';
 
 const Chat = () => {
-
-    const [isLog, logout] = useAuthContext();
     const customOrder = orderBy("createAt","asc");
     const customQuery = query(messagesCollection,customOrder);
     const [messages, loading] = useCollection(customQuery)
-    const [message, setMessage] = useState("");
 
-    const handleChange = ({target}) => {
-        const { value } = target;
-        setMessage(value);
-    }
     const handleSubmit = (event) => {
         event.preventDefault();
         const { uid, photoURL, displayName } = auth.currentUser;
+        const message = event.target.msgText;
         const data = {
             createAt : serverTimestamp(),
-            message,
+            message: message.value,
             likes:[],
             dislikes:[],
             author:{
@@ -37,36 +27,33 @@ const Chat = () => {
             }
         }
         addDoc(messagesCollection,data);
-        setMessage('');
+        message.value = ''
     }
-
     return(
-        <main className='chat'>
-            <header className='chat-header'>
-                <h2> Main Chat </h2>
-                <button onClick={logout} className='button-transparent'>
+        <div className='chat'>
+            <main className='chat-content'>
+                <header className='chat-header'>
+                    <h2>Main Chat</h2>
                     <LogoutIcon/>
-                </button>
-            </header>
-            <ul className="chat-body">
-                {
-                    loading
-                    ? <h1>Loading...</h1>
-                    : messages.map((doc) => <Message key={doc.id} messageData={{...doc.data(), msgId: doc.id}}/>)
-                }
-                <ScrollToBottom dependence={messages}/>
-            </ul>
-            <form className='chat-footer' onSubmit={handleSubmit}>
-                <input type="text" className='chat-input' onChange={handleChange}
-                    value={message} placeholder='Write a message'/>
-                <button className='button-circle'>
-                    <SendIcon sx={{ fontSize: "1.5rem" }}/>
-                </button>
-            </form>
-        </main>
+                </header>
+                <ul className='chat-list-messages'>
+                    {
+                        loading
+                        ? <h1>Loading...</h1>
+                        : messages.map((doc) =>
+                        <Message key={doc.id} msgData={{...doc.data(), msgId: doc.id}}/>)
+                    }
+                </ul>
+                <form className='chat-footer' onSubmit={handleSubmit}>
+                    <input type="text" className='chat-input' name='msgText' placeholder='Write a message!'/>
+                    <button className='button-circle'>
+                        <SendIcon/>
+                    </button>
+                </form>
+            </main>
+        </div>
     );
 }
 
-
-
 export default Chat;
+

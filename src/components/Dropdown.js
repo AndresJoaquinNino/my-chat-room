@@ -6,19 +6,17 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
-const Dropdown = ({messageData,changeState}) =>{
-
+const Dropdown = ({ messageData, changeState, responseMessage }) =>{
     const userId = auth.currentUser.uid;
     const isUserMessage = userId === messageData.author.uid;
+    const { message, msgId, likes, dislikes } = messageData;
 
     const copyInClipboard = () => {
-        const { message } = messageData;
         navigator.clipboard.writeText(message);
         changeState(false);
     }
 
     const toggleInteraction =  (sendInteraction) => {
-        const { msgId, likes, dislikes } = messageData
         const messageRef = doc(database, "messages", msgId);
         const isInLikes = likes.includes(userId)
         const isInDislikes = dislikes.includes(userId)
@@ -38,7 +36,7 @@ const Dropdown = ({messageData,changeState}) =>{
 
     return(
         <div className={isUserMessage ? 'dropdown-user' : 'dropdown'}>
-            <button className='option'>
+            <button className='option' onClick={() => responseMessage({ status: true, data: messageData })}>
                 <ReplyIcon sx={customStyle}/>
             </button>
             <button className='option' onClick={copyInClipboard}>

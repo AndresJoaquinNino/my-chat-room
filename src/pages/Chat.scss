@@ -1,15 +1,12 @@
 @import '../scss/colors';
 @import '../scss/reset';
 @import '../scss/mixins';
+@import '../scss/buttons';
+
 
 $max-width: 662px;
 $header-height: 2.5em;
 $footer-height: 4em;
-
-@mixin chatWidth {
-    width: 100%;
-    max-width: $max-width;
-}
 
 .chat{
     position: absolute;
@@ -18,46 +15,51 @@ $footer-height: 4em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    &-content{
+        width: 100%;
+        height: 100%;
+        max-width: $max-width;
+        position: relative;
+    }
     &-header{
-        @include chatWidth;
-        background-color: $primary-l-color;
-        height: $header-height;
-        padding: 0 1em;
-        position: fixed;
+        position: absolute;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 0 1em;
+        width: 100%;
+        top: 0;
+        height: $header-height;
+        background-color: $primary-l-color;
+        svg{
+            cursor: pointer;
+        }
     }
-    &-body{
-        @include chatWidth;
-        background-color: $main-l-color;
-        padding: 0.5em;
-        margin-top: $header-height;
+    &-list-messages{
+        $padding: 1em;
+        position: absolute;
+        top: $header-height;
+        width: 100%;
         height: calc(100% - $header-height - $footer-height);
-        list-style: none;
-        overflow-y: scroll;
+        background-color: $main-l-color;
+        padding: $padding;
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
+        gap: 0.5em;
     }
+
     &-footer{
-        @include chatWidth;
-        @include flexCenter(row,1em);
-        background-color: $main-color;
-        height: $footer-height;
-        position: fixed;
+        position: absolute;
         bottom: 0;
+        width: 100%;
+        height: $footer-height;
+        background-color: $main-color;
+        @include flexCenter(row,1em);
     }
     &-input{
-        width: 80%;
+        width: 75%;
+        border: 0.25em solid $main-l-color;
+        padding: 0.5em 0.5em;
         color: #fff;
-        font-size: 1.25rem;
-        border: 0.1em solid $main-l-color;
-        padding: 0.25em 0.4em;
-        border-radius: 0.25em;
     }
 }
-
-
-@import '../scss/buttons';
-@import '../scss/util';

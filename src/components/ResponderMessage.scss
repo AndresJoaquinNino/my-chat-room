@@ -9,7 +9,7 @@ $footer-height: 4em;
 }
 
 
-.response-message{
+.responder{
     @include chatWidth;
     @include flexCenter(row);
     height: 5em;
@@ -18,29 +18,29 @@ $footer-height: 4em;
     position: fixed;
     margin-bottom: $footer-height;
     bottom: 0;
-}
-.container-message{
-    background-color: $main-l-color;
-    height: 100%;
-    width: 95%;
-    border-radius: 0.5em;
-    display: flex;
-}
-.border{
-    border-radius: 0.5em 0 0 0.5em;
-    background-color: $grey-color;
-    height: 100%;
-    width: 0.75em;
-}
-.content{
-    width: 100%;
-    padding: 0 0.5em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-.content-header{
-    color: $primary-l-color;
+    &-container{
+        background-color: $main-l-color;
+        height: 100%;
+        width: 95%;
+        border-radius: 0.5em;
+        display: flex;
+    }
+    &-border{
+        border-radius: 0.5em 0 0 0.5em;
+        background-color: $grey-color;
+        height: 100%;
+        width: 0.75em;
+    }
+    &-header{
+        color: $primary-l-color;
+    }
+    &-content{
+        width: 100%;
+        padding: 0 0.5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
 }
 .circle-icon{
     @include flexCenter(row);
@@ -50,6 +50,7 @@ $footer-height: 4em;
     background-color: $grey-color;
     color: $main-color;
     border-radius: 50%;
+    border: none;
     transform: translate(25%,-25%);
     cursor: pointer;
 }
